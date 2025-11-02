@@ -1,0 +1,17 @@
+# Supabase Edge Function Cron Schedules
+
+[functions.energy_update.schedules.recalc_hourly]
+cron = "0 * * * *"
+payload = "{\"source\":\"recalc\"}"
+
+[functions.generate_brief.schedules.morning]
+cron = "0 7 * * *"
+payload = "{\"kind\":\"morning\"}"
+
+[functions.generate_brief.schedules.evening]
+cron = "0 21 * * *"
+payload = "{\"kind\":\"evening\"}"
+
+[functions.notify_low_energy.schedules.hourly_alert]
+cron = "15 * * * *"
+
