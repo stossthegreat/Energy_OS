@@ -1,62 +1,56 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
 android {
-    namespace = "com.energyos.app"
+    namespace = "com.example.energyos"
     compileSdk = 34
-    ndkVersion = "25.1.8937393"
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
 
     defaultConfig {
-        applicationId = "com.energyos.app"
+        applicationId = "com.example.energyos"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0.0"
-        multiDexEnabled = true
-    }
-
-    // Read signing config from key.properties (for release builds)
-    val keystorePropertiesFile = rootProject.file("key.properties")
-    val keystoreProperties = java.util.Properties()
-    
-    if (keystorePropertiesFile.exists()) {
-        keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile))
-    }
-
-    signingConfigs {
-        create("release") {
-            if (keystorePropertiesFile.exists()) {
-                keyAlias = keystoreProperties["keyAlias"] as String
-                keyPassword = keystoreProperties["keyPassword"] as String
-                storeFile = file(keystoreProperties["storeFile"] as String)
-                storePassword = keystoreProperties["storePassword"] as String
-            }
-        }
+        versionName = "1.0"
     }
 
     buildTypes {
-        release {
-            signingConfig = if (keystorePropertiesFile.exists()) {
-                signingConfigs.getByName("release")
-            } else {
-                signingConfigs.getByName("debug")
+        getByName("release") {
+            isMinifyEnabled = false
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+            if (keystorePropertiesFile.exists()) {
+                signingConfig = signingConfigs.create("release") {
+                    storeFile = file(keystoreProperties["storeFile"] as String)
+                    storePassword = keystoreProperties["storePassword"] as String
+                    keyAlias = keystoreProperties["keyAlias"] as String
+                    keyPassword = keystoreProperties["keyPassword"] as String
+                }
             }
-            minifyEnabled = false
-            shrinkResources = false
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
     }
 }
 
