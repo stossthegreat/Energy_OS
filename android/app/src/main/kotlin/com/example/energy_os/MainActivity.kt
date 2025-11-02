@@ -1,4 +1,4 @@
-package com.example.energy_os
+package com.example.energyos
 
 import io.flutter.embedding.android.FlutterActivity
 
