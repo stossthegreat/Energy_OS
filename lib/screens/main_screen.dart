@@ -9,6 +9,8 @@ import 'tabs/train_tab.dart';
 import 'tabs/mind_tab.dart';
 import 'tabs/evolve_tab.dart';
 import 'tabs/tribe_tab.dart';
+import 'settings_screen.dart';
+import 'inbox_screen.dart';
 
 final _currentTabProvider = StateProvider<int>((ref) => 0);
 
@@ -36,10 +38,20 @@ class MainScreen extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         appBar: CustomAppBar(
           onSettingsTap: () {
-            // TODO: Navigate to settings
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SettingsScreen(),
+              ),
+            );
           },
           onInboxTap: () {
-            // TODO: Navigate to inbox
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const InboxScreen(),
+              ),
+            );
           },
           unreadCount: 3, // TODO: Get from provider
         ),

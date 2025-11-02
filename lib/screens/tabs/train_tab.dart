@@ -345,7 +345,7 @@ class _TrainTabState extends ConsumerState<TrainTab> {
               ),
               const SizedBox(width: 8),
               Text(
-                '7-DAY RHYTHM ARC',
+                '7-DAY ENERGY ARC',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.white.withOpacity(0.4),
@@ -362,29 +362,33 @@ class _TrainTabState extends ConsumerState<TrainTab> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: List.generate(days.length, (index) {
                 return Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: values[index] * 1.6,
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                        decoration: BoxDecoration(
-                          gradient: AppTheme.createGradient(AppConstants.trainGradient),
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(8),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: values[index] * 1.6,
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
+                          decoration: BoxDecoration(
+                            gradient: AppTheme.createGradient(AppConstants.trainGradient),
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(8),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        days[index],
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.3),
-                          fontSize: 14,
+                        const SizedBox(height: 8),
+                        Text(
+                          days[index],
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.3),
+                            fontSize: 12,
+                          ),
+                          overflow: TextOverflow.visible,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 );
               }),

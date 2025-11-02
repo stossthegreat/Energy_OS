@@ -34,39 +34,26 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Left side - App name and tagline
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ShaderMask(
-                  shaderCallback: (bounds) => LinearGradient(
-                    colors: [
-                      Colors.white,
-                      Colors.white.withOpacity(0.4),
-                    ],
-                  ).createShader(bounds),
-                  child: const Text(
-                    'ENERGY OS',
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: -0.5,
-                      color: Colors.white,
-                    ),
-                  ),
+            // Left side - App name
+            ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                colors: [
+                  Colors.white,
+                  Colors.white.withOpacity(0.4),
+                ],
+              ).createShader(bounds),
+              child: const Text(
+                'ENERGY OS',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: -0.5,
+                  color: Colors.white,
                 ),
-                Text(
-                  'Your Biological Operating System',
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.white.withOpacity(0.4),
-                    letterSpacing: 1.5,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-              ],
+              ),
             ),
+            
+            const SizedBox(width: 8),
             
             // Right side - Time and icons
             Row(

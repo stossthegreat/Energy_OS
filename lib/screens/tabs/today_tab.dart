@@ -86,75 +86,83 @@ class _TodayTabState extends ConsumerState<TodayTab>
   }
 
   Widget _buildRhythmPulse(double energyLevel) {
-    return SizedBox(
-      height: 320,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          AnimatedBuilder(
-            animation: _pulseController,
-            builder: (context, child) {
-              final pulse = 1 + math.sin(_pulseController.value * 2 * math.pi) * 0.15;
-              return Transform.scale(
-                scale: pulse,
-                child: Container(
-                  width: 160,
-                  height: 160,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: AppTheme.createGradient(AppConstants.todayGradient),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppTheme.hexToColor(AppConstants.todayGradient[0])
-                            .withOpacity(0.4),
-                        blurRadius: 60,
-                        spreadRadius: 20,
-                      ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Container(
-                      width: 140,
-                      height: 140,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.black.withOpacity(0.4),
-                      ),
-                      child: const Icon(
-                        Icons.auto_awesome,
-                        size: 64,
-                        color: Colors.white,
+    return Center(
+      child: SizedBox(
+        height: 320,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            AnimatedBuilder(
+              animation: _pulseController,
+              builder: (context, child) {
+                final pulse = 1 + math.sin(_pulseController.value * 2 * math.pi) * 0.15;
+                return Transform.scale(
+                  scale: pulse,
+                  child: Container(
+                    width: 160,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: AppTheme.createGradient(AppConstants.todayGradient),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme.hexToColor(AppConstants.todayGradient[0])
+                              .withOpacity(0.4),
+                          blurRadius: 60,
+                          spreadRadius: 20,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Container(
+                        width: 140,
+                        height: 140,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.black.withOpacity(0.4),
+                        ),
+                        child: const Icon(
+                          Icons.auto_awesome,
+                          size: 64,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            },
-          ),
-          Positioned(
-            bottom: 40,
-            child: Column(
-              children: [
-                const Text(
-                  'Steady',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Your rhythm is balanced',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white.withOpacity(0.4),
-                  ),
-                ),
-              ],
+                );
+              },
             ),
-          ),
-        ],
+            Positioned(
+              bottom: 40,
+              left: 0,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Column(
+                  children: [
+                    const Text(
+                      'Steady',
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Your Energy is balanced',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white.withOpacity(0.4),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -406,7 +414,7 @@ class _TodayTabState extends ConsumerState<TodayTab>
           emoji: '🥗',
           title: meal.title ?? 'Meal',
           time: DateFormat('h:mm a').format(meal.timestamp),
-          story: 'Balanced nutrition with ${meal.proteinG?.toStringAsFixed(0) ?? "?"g protein',
+          story: 'Balanced nutrition with ${meal.proteinG?.toStringAsFixed(0) ?? "?"}g protein',
           gradientColors: AppConstants.todayGradient,
         )),
       ],
