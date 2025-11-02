@@ -45,40 +45,25 @@ class _TodayTabState extends ConsumerState<TodayTab>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Rhythm Pulse Hero
           _buildRhythmPulse(energyLevel),
-
           const SizedBox(height: 32),
-
-          // Morning Brief
           _buildMorningBrief(),
-
           const SizedBox(height: 24),
-
-          // Daily Story Card
           _buildDailyStory(),
-
           const SizedBox(height: 24),
-
-          // Sleep-Fuel Sync
           latestSleep.when(
-            data: (sleep) => sleep != null ? _buildSleepSync(sleep) : const SizedBox(),
+            data: (sleep) =>
+                sleep != null ? _buildSleepSync(sleep) : const SizedBox(),
             loading: () => const CircularProgressIndicator(),
             error: (_, __) => const SizedBox(),
           ),
-
           const SizedBox(height: 24),
-
-          // Meal Timeline
           todayMeals.when(
             data: (meals) => _buildMealTimeline(meals),
             loading: () => const CircularProgressIndicator(),
             error: (_, __) => const SizedBox(),
           ),
-
           const SizedBox(height: 24),
-
-          // Ask Your Rhythm
           _buildAskRhythm(),
         ],
       ),
@@ -94,7 +79,8 @@ class _TodayTabState extends ConsumerState<TodayTab>
           AnimatedBuilder(
             animation: _pulseController,
             builder: (context, child) {
-              final pulse = 1 + math.sin(_pulseController.value * 2 * math.pi) * 0.15;
+              final pulse =
+                  1 + math.sin(_pulseController.value * 2 * math.pi) * 0.15;
               return Transform.scale(
                 scale: pulse,
                 child: Container(
@@ -102,11 +88,13 @@ class _TodayTabState extends ConsumerState<TodayTab>
                   height: 160,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    gradient: AppTheme.createGradient(AppConstants.todayGradient),
+                    gradient:
+                        AppTheme.createGradient(AppConstants.todayGradient),
                     boxShadow: [
                       BoxShadow(
-                        color: AppTheme.hexToColor(AppConstants.todayGradient[0])
-                            .withOpacity(0.4),
+                        color:
+                            AppTheme.hexToColor(AppConstants.todayGradient[0])
+                                .withOpacity(0.4),
                         blurRadius: 60,
                         spreadRadius: 20,
                       ),
@@ -166,7 +154,8 @@ class _TodayTabState extends ConsumerState<TodayTab>
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.hexToColor(AppConstants.todayGradient[0]).withOpacity(0.3),
+            color: AppTheme.hexToColor(AppConstants.todayGradient[0])
+                .withOpacity(0.3),
             blurRadius: 30,
           ),
         ],
@@ -277,7 +266,8 @@ class _TodayTabState extends ConsumerState<TodayTab>
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     foreground: Paint()
-                      ..shader = AppTheme.createGradient(AppConstants.todayGradient)
+                      ..shader = AppTheme.createGradient(
+                              AppConstants.todayGradient)
                           .createShader(const Rect.fromLTWH(0, 0, 200, 70)),
                   ),
                 ),
@@ -287,7 +277,8 @@ class _TodayTabState extends ConsumerState<TodayTab>
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const TextSpan(
-                  text: '. Perfect timing for that deep focus work you\'ve been planning.',
+                  text:
+                      '. Perfect timing for that deep focus work you\'ve been planning.',
                 ),
               ],
             ),
@@ -402,13 +393,16 @@ class _TodayTabState extends ConsumerState<TodayTab>
           ],
         ),
         const SizedBox(height: 16),
-        ...meals.map((meal) => MealStoryCard(
-          emoji: '🥗',
-          title: meal.title ?? 'Meal',
-          time: DateFormat('h:mm a').format(meal.timestamp),
-          story: 'Balanced nutrition with ${meal.proteinG?.toStringAsFixed(0) ?? "?"g protein',
-          gradientColors: AppConstants.todayGradient,
-        )),
+        ...meals.map(
+          (meal) => MealStoryCard(
+            emoji: '🥗',
+            title: meal.title ?? 'Meal',
+            time: DateFormat('h:mm a').format(meal.timestamp),
+            story:
+                'Balanced nutrition with ${meal.proteinG?.toStringAsFixed(0) ?? "?"}g protein',
+            gradientColors: AppConstants.todayGradient,
+          ),
+        ),
       ],
     );
   }
@@ -477,4 +471,3 @@ class _TodayTabState extends ConsumerState<TodayTab>
     );
   }
 }
-
